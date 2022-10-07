@@ -38,9 +38,7 @@ public class HelloController {
         return postService.findById(id);
     }
 
-
-
-    @GetMapping("hello")
+    @GetMapping("api/hello")
     public String hello() {
         return "Hello!";
     }

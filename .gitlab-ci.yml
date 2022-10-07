@@ -5,10 +5,11 @@ build test-backend:
   stage: build
   only:
     refs:
-      - master
+      - main
   tags:
     - main
   script:
+    - chmod +x ./mvnw
     - ./mvnw package
     - docker build -t test-backend .
 
@@ -16,7 +17,7 @@ deploy test-backend:
   stage: deploy
   only:
     refs:
-      - master
+      - main
   tags:
     - main
   script:

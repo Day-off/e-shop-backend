@@ -9,6 +9,7 @@ build test-backend:
   tags:
     - main
   script:
+    - chmod +x ./mvnw
     - ./mvnw package
     - docker build -t test-backend .
 

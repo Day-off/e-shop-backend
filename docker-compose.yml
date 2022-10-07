@@ -1,0 +1,10 @@
+version: "3.9" # optional since v1.27.0
+services:
+  backend:
+    image: krsobo/web-project:latest
+    container_name: backend
+    restart: always
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./application.yml:/app/application.yml

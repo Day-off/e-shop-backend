@@ -3,6 +3,7 @@ package com.example.iti0302backend.user;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Time;
 
 @Entity
 @Table(name = "users", schema = "public")
@@ -12,7 +13,7 @@ public class User {
     private Integer user_id;
     private String firstName;
     private String secondName;
-    private Integer contact;
+    private Time contact;
 
     public Integer getUser_id() {
         return user_id;
@@ -38,11 +39,11 @@ public class User {
         this.secondName = secondName;
     }
 
-    public Integer getContact() {
+    public Time getContact() {
         return contact;
     }
 
-    public void setContact(Integer contact) {
-        this.contact = contact;
+    public void setContact(Time registration_time) {
+        this.contact = registration_time;
     }
 }

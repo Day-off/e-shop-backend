@@ -1,4 +1,6 @@
 spring:
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-root.xml
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
@@ -9,3 +11,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+    hibernate:
+      ddl-auto: none

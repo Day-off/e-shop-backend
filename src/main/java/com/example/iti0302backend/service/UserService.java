@@ -1,26 +1,35 @@
 package com.example.iti0302backend.service;
 
+import com.example.iti0302backend.dto.UserDto;
+import com.example.iti0302backend.mapper.UserMapper;
+import com.example.iti0302backend.repository.UserRepository;
 import com.example.iti0302backend.user.User;
-import com.example.iti0302backend.user.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public List<UserDto> getUsers() {
+        return userMapper.toDtoList(userRepository.findAll());
     }
 
-    public Optional<User> findById(Integer id){
-        return userRepository.findById(id);
-    }
-
-    public List<User> findByName(String name) {
-        return userRepository.findAllByFirstNameIgnoreCase(name);
+    public void addUser(UserDto userDto) {
+        try {
+            User user = new User();
+            user.setFirstName(userDto.getFirstName());
+            user.setLastName(userDto.getLastName());
+            user.setEmail(userDto.getEmail());
+            user.setPassword(userDto.getPassword());
+            userRepository.save(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,49 +1,38 @@
 package com.example.iti0302backend.user;
 
+import lombok.*;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.sql.Time;
 
 @Entity
-@Table(name = "users", schema = "public")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Table(name = "users")
 public class User {
 
     @Id
-    private Integer user_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private Long id;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "firstname")
     private String firstName;
-    private String secondName;
-    private Time contact;
 
-    public Integer getUser_id() {
-        return user_id;
-    }
+    @Column(name = "lastname")
+    private String lastName;
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getSecondName() {
-        return secondName;
-    }
-
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
-
-    public Time getContact() {
-        return contact;
-    }
-
-    public void setContact(Time registration_time) {
-        this.contact = registration_time;
-    }
 }

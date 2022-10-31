@@ -4,7 +4,6 @@ import com.example.iti0302backend.dto.PostDto;
 import com.example.iti0302backend.post.Post;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
-
 import javax.validation.Valid;
 import java.util.List;
 

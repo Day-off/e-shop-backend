@@ -38,5 +38,50 @@
         </createTable>
     </changeSet>
 
+    <changeSet  id="renameColumnState" author="Liza">
+        <renameColumn
+                       columnDataType="text"
+                       newColumnName="email"
+                       oldColumnName="state"
+                       schemaName="public"
+                       tableName="users"/>
+    </changeSet>
+
+    <changeSet  id="renameColumnStateTime" author="Liza">
+        <renameColumn
+                columnDataType="varchar(50)"
+                newColumnName="password"
+                oldColumnName="registration_time"
+                schemaName="public"
+                tableName="users"/>
+    </changeSet>
+
+    <changeSet author="Liza" id="dropColumnEmail">
+        <dropColumn
+                    columnName="email"
+                    schemaName="public"
+                    tableName="users">
+        </dropColumn>
+    </changeSet>
+
+    <changeSet author="Liza" id="dropColumnPassword">
+        <dropColumn
+                columnName="password"
+                schemaName="public"
+                tableName="users">
+        </dropColumn>
+    </changeSet>
+
+    <changeSet id="addColumnEmailAndPassword" author="Liza">
+        <addColumn tableName="users">
+            <column name="email" type="varchar(50)"/>
+        </addColumn>
+        <addColumn tableName="users">
+            <column name="password" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+
+
+
 
 </databaseChangeLog>

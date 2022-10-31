@@ -1,23 +1,27 @@
 package com.example.iti0302backend.service;
 
-import com.example.iti0302backend.post.Post;
+import com.example.iti0302backend.dto.PostDto;
+import com.example.iti0302backend.map.MapStructMapper;
 import com.example.iti0302backend.post.PostRepository;
-import com.example.iti0302backend.user.User;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class PostService {
 
     private final PostRepository postRepository;
-
-    public PostService(PostRepository postRepository) {
+    private final MapStructMapper mapstructMapper;
+    public PostService(PostRepository postRepository, MapStructMapper mapstructMapper) {
         this.postRepository = postRepository;
+        this.mapstructMapper = mapstructMapper;
     }
 
-    public Optional<Post> findById(Integer id){
-        return postRepository.findById(id);
+    public List<PostDto> getAll() {
+        return mapstructMapper.postListToPostDtoList(postRepository.findAll());
     }
 
+    public List<PostDto> findByHeader(String head) {
+        return mapstructMapper.postListToPostDtoList(postRepository.findPostByHeadContainingIgnoreCase(head));
+    }
 }

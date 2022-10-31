@@ -34,5 +34,4 @@ public class User {
 
     @Column(name = "lastname")
     private String lastName;
-
 }

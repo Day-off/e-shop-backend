@@ -12,5 +12,9 @@ public interface MapStructMapper {
 
     Post postDtoToPost(@Valid PostDto postDto);
 
+
+    PostDto postToPostDto(Post post);
+
+    // User list to List of Dto Users
     List<PostDto> postListToPostDtoList(List<Post> posts);
 }

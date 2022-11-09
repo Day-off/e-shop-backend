@@ -22,7 +22,7 @@ public class PostController {
     }
 
     @GetMapping("/{head}")
-    public List<PostDto> getById(@PathVariable(value = "head") String head) {
+    public List<PostDto> getById(@PathVariable("head") String head) {
         return postService.findByHeader(head);
     }
 

@@ -3,7 +3,6 @@ package com.example.iti0302backend.controllers;
 import com.example.iti0302backend.dto.PostDto;
 import com.example.iti0302backend.service.PostService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController

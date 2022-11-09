@@ -5,7 +5,6 @@ import com.example.iti0302backend.map.MapStructMapper;
 import com.example.iti0302backend.post.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

@@ -2,23 +2,24 @@ package com.example.iti0302backend.controllers;
 
 import com.example.iti0302backend.dto.PostDto;
 import com.example.iti0302backend.service.PostService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
-@RequestMapping("api/post")
-@CrossOrigin("http://193.40.255.30:8081/")
 public class PostController {
 
     private final PostService postService;
 
-    public PostController(PostService postService) {
-        this.postService = postService;
+    @GetMapping("/api/posts")
+    public List<PostDto> getPosts() {
+        return postService.getPosts();
     }
 
-    @GetMapping
-    public List<PostDto> getAll(){
-        return postService.getAll();
+    @PostMapping("/api/posts")
+    public void addPost(@RequestBody PostDto postDto) {
+        postService.addPost(postDto);
     }
 
     @GetMapping("/{head}")

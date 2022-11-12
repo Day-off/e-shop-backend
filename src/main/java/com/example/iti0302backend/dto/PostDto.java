@@ -1,18 +1,11 @@
 package com.example.iti0302backend.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import javax.validation.constraints.NotNull;
-
-@Getter
-@Setter
+import lombok.Data;
+@Data
 public class PostDto {
-    private int id;
 
+    private Long id;
     private String head;
-
     private String description;
-
-    @NotNull
-    private String imageLink;
+    private byte[] imageLink;
 }

@@ -1,22 +1,29 @@
 package com.example.iti0302backend.post;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+@Entity
 @Getter
 @Setter
-@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "posts")
 public class Post {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
-    private Integer id;
+    private Long id;
+
+    @Column(name = "head")
     private String head;
+
+    @Column(name = "description")
     private String description;
+
     @Column(name = "image_link")
-    private String imageLink;
+    private byte[] imageLink;
 }

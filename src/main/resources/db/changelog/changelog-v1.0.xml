@@ -81,6 +81,13 @@
         </addColumn>
     </changeSet>
 
+    <changeSet  author="liquibase-docs"  id="modifyDataType-example">
+        <modifyDataType
+                         columnName="password"
+                         newDataType="varchar"
+                         tableName="users"/>
+    </changeSet>
+
 
 
 

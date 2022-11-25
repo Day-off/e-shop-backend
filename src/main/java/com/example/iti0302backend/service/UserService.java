@@ -5,8 +5,8 @@ import com.example.iti0302backend.mapper.UserMapper;
 import com.example.iti0302backend.repository.UserRepository;
 import com.example.iti0302backend.user.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -15,9 +15,11 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+
     private final UserMapper userMapper;
 
     private final PasswordEncoder passwordEncoder;
+
 
     public List<UserDto> getUsers() {
         return userMapper.toDtoList(userRepository.findAll());

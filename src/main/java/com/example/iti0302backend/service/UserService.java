@@ -3,6 +3,7 @@ package com.example.iti0302backend.service;
 import com.example.iti0302backend.dto.UserDto;
 import com.example.iti0302backend.mapper.UserMapper;
 import com.example.iti0302backend.repository.UserRepository;
+import com.example.iti0302backend.security.jwt.JwtUtils;
 import com.example.iti0302backend.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    private final JwtUtils jwtUtils;
 
     private final UserMapper userMapper;
 
@@ -32,6 +35,15 @@ public class UserService {
             userRepository.save(user);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public String login(String username, String password) {
+        User user = userRepository.findByFirstName(username);
+        if (passwordEncoder.matches(password, user.getPassword())) {
+            return JwtUtils.generateTokenFromUsername(username);
+        } else {
+            throw new RuntimeException("Invalid password!");
         }
     }
 }

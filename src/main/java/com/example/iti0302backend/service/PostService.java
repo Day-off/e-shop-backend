@@ -3,16 +3,21 @@ package com.example.iti0302backend.service;
 import com.example.iti0302backend.dto.PostDto;
 import com.example.iti0302backend.map.MapStructMapper;
 import com.example.iti0302backend.mapper.PostMapper;
+import com.example.iti0302backend.post.Post;
 import com.example.iti0302backend.repository.PostRepository;
+import com.example.iti0302backend.repository.UserRepository;
+import com.example.iti0302backend.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class PostService {
 
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
     private final MapStructMapper mapstructMapper;
 
     private final PostMapper postMapper;
@@ -23,7 +28,10 @@ public class PostService {
 
     public void addPost(PostDto postDto) {
         try {
-            postRepository.save(postMapper.toPost(postDto));
+            Optional<User> user = userRepository.findById(postDto.getUserId());
+            Post post = postMapper.toPost(postDto);
+            user.ifPresent(post::setUser);
+            postRepository.save(post);
         } catch (Exception e) {
             e.printStackTrace();
         }

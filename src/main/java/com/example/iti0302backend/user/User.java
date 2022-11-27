@@ -1,13 +1,10 @@
 package com.example.iti0302backend.user;
 
+import com.example.iti0302backend.post.Post;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -34,4 +31,7 @@ public class User {
 
     @Column(name = "lastname")
     private String lastName;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Post> posts;
 }

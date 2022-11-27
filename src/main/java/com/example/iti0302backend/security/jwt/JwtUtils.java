@@ -14,11 +14,11 @@ import java.util.Map;
 @Component
 public class JwtUtils {
 
-    private static final long EXPIRATIONTIME = 1000 * 60 * 60 * 24 * 10; // 10 days
+    protected static final long EXPIRATIONTIME = 1000 * 60 * 60 * 24 * 10; // 10 days
     LocalDateTime currentTime = LocalDateTime.now();
-    private static final byte[] keyBytes = Decoders.BASE64.decode("c29tZSBraW5kIG9mIHJhbmRvbSBzZWNyZXQdrfgyuhjoiklkmjnhbgfdfghj=");
+    protected static final byte[] keyBytes = Decoders.BASE64.decode("c29tZSBraW5kIG9mIHJhbmRvbSBzZWNyZXQdrfgyuhjoiklkmjnhbgfdfghj=");
 
-    private static final Key key = Keys.hmacShaKeyFor(keyBytes);
+    protected static final Key key = Keys.hmacShaKeyFor(keyBytes);
 
     public static String generateTokenFromUsername(String username) {
         Map<String, Object> claims = new HashMap<>();

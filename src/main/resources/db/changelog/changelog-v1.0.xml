@@ -88,30 +88,7 @@
                          tableName="users"/>
     </changeSet>
 
-    <changeSet id="creatorId" author="Kristina">
-        <addColumn tableName="posts">
-            <column name="user_id" type="int">
-                <constraints foreignKeyName="creatorId" references="users(user_id)"/>
-            </column>
-        </addColumn>
-    </changeSet>
 
-    <changeSet id="addCategoryColum" author="Kristina">
-        <createTable tableName="category">
-            <column name="category_id" type="int" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="type" type="varchar(50)"/>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="addToPostCategoryId" author="Kristina">
-        <addColumn tableName="posts">
-            <column name="category" type="int">
-                <constraints foreignKeyName="CategoryId" references="category(category_id)"/>
-            </column>
-        </addColumn>
-    </changeSet>
 
 
 </databaseChangeLog>

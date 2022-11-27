@@ -28,10 +28,4 @@ public class UserController {
         return userService.login(userDto.getFirstName(), userDto.getPassword());
     }
 
-    @GetMapping("/api/user/{id}")
-    public UserDto getUserById(@PathVariable("id") Integer id) {
-        return userService.findById(id);
-    }
-
-
 }

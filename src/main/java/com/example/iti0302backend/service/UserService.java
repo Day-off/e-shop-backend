@@ -28,10 +28,6 @@ public class UserService {
         return userMapper.toDtoList(userRepository.findAll());
     }
 
-    public UserDto findById(Integer id) {
-        return userRepository.findById(id).map(user -> userMapper.toDto(user, user.getPosts())).orElse(null);
-    }
-
     public void addUser(UserDto userDto) {
         try {
             User user = userMapper.toUser(userDto);

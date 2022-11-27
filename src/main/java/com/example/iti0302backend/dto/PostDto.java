@@ -4,9 +4,8 @@ import lombok.Data;
 @Data
 public class PostDto {
 
-    private Integer id;
+    private Long id;
     private String head;
     private String description;
     private byte[] imageLink;
-    private Integer userId;
 }

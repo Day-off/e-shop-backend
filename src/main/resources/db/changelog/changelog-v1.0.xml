@@ -38,16 +38,16 @@
         </createTable>
     </changeSet>
 
-    <changeSet  id="renameColumnState" author="Liza">
+    <changeSet id="renameColumnState" author="Liza">
         <renameColumn
-                       columnDataType="text"
-                       newColumnName="email"
-                       oldColumnName="state"
-                       schemaName="public"
-                       tableName="users"/>
+                columnDataType="text"
+                newColumnName="email"
+                oldColumnName="state"
+                schemaName="public"
+                tableName="users"/>
     </changeSet>
 
-    <changeSet  id="renameColumnStateTime" author="Liza">
+    <changeSet id="renameColumnStateTime" author="Liza">
         <renameColumn
                 columnDataType="varchar(50)"
                 newColumnName="password"
@@ -58,9 +58,9 @@
 
     <changeSet author="Liza" id="dropColumnEmail">
         <dropColumn
-                    columnName="email"
-                    schemaName="public"
-                    tableName="users">
+                columnName="email"
+                schemaName="public"
+                tableName="users">
         </dropColumn>
     </changeSet>
 
@@ -81,14 +81,38 @@
         </addColumn>
     </changeSet>
 
-    <changeSet  author="liquibase-docs"  id="modifyDataType-example">
+    <changeSet author="liquibase-docs" id="modifyDataType-example">
         <modifyDataType
-                         columnName="password"
-                         newDataType="varchar"
-                         tableName="users"/>
+                columnName="password"
+                newDataType="varchar"
+                tableName="users"/>
     </changeSet>
 
 
+    <changeSet id="creatorId" author="Kristina">
+        <addColumn tableName="posts">
+            <column name="user_id" type="int">
+                <constraints foreignKeyName="creatorId" references="users(user_id)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="addCategoryColum" author="Kristina">
+        <createTable tableName="category">
+            <column name="category_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="type" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="addToPostCategoryId" author="Kristina">
+        <addColumn tableName="posts">
+            <column name="category" type="int">
+                <constraints foreignKeyName="CategoryId" references="category(category_id)"/>
+            </column>
+        </addColumn>
+    </changeSet>
 
 
 </databaseChangeLog>

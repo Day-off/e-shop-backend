@@ -20,7 +20,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/api/**").permitAll()
+                .antMatchers("/api/public/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

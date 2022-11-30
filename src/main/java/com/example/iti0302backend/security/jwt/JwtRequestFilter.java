@@ -3,7 +3,9 @@ package com.example.iti0302backend.security.jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -21,9 +24,10 @@ import java.util.Optional;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
+                                    @NonNull FilterChain filterChain) throws ServletException, IOException {
         Optional<String> jwt = getToken(request);
-        if (!jwt.isPresent()) {
+        if (jwt.isEmpty()) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -52,6 +56,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     }
 
     private UsernamePasswordAuthenticationToken buildAuthToken(Claims claims) {
-        return new UsernamePasswordAuthenticationToken(claims.get("firstName"), "");
+        return new UsernamePasswordAuthenticationToken(claims.get("firstName"), "", List.of(new SimpleGrantedAuthority("USER")));
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -38,10 +39,11 @@ public class UserService {
         }
     }
 
-    public String login(String username, String password) {
-        User user = userRepository.findByFirstName(username);
+    public String login(String email, String password) {
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        User user = optionalUser.orElseThrow(() -> new RuntimeException("User not found"));
         if (passwordEncoder.matches(password, user.getPassword())) {
-            return JwtUtils.generateTokenFromUsername(username);
+            return JwtUtils.generateTokenFromEmail(email);
         } else {
             throw new RuntimeException("Invalid password!");
         }

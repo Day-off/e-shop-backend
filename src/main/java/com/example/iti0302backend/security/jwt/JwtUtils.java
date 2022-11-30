@@ -1,12 +1,11 @@
 package com.example.iti0302backend.security.jwt;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,14 +14,12 @@ import java.util.Map;
 public class JwtUtils {
 
     protected static final long EXPIRATIONTIME = 1000 * 60 * 60 * 24 * 10; // 10 days
-    LocalDateTime currentTime = LocalDateTime.now();
-    protected static final byte[] keyBytes = Decoders.BASE64.decode("c29tZSBraW5kIG9mIHJhbmRvbSBzZWNyZXQdrfgyuhjoiklkmjnhbgfdfghj=");
 
-    protected static final Key key = Keys.hmacShaKeyFor(keyBytes);
+    protected static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    public static String generateTokenFromUsername(String username) {
+    public static String generateTokenFromEmail(String email) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("firstName", username);
+        claims.put("email", email);
         return Jwts.builder()
                 .setSubject("subject")
                 .addClaims(claims)

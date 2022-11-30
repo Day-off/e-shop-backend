@@ -18,14 +18,14 @@ public class UserController {
         return userService.getUsers();
     }
 
-    @PostMapping("/api/register")
+    @PostMapping("/api/public/register")
     public void registerNewEmployee(@RequestBody UserDto userDto) {
         userService.addUser(userDto);
     }
 
-    @PostMapping("/api/login")
+    @PostMapping("/api/public/login")
     public String loginUser(@RequestBody UserDto userDto) {
-        return userService.login(userDto.getFirstName(), userDto.getPassword());
+        return userService.login(userDto.getEmail(), userDto.getPassword());
     }
 
 }

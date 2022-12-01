@@ -4,6 +4,7 @@ import com.example.iti0302backend.dto.PostDto;
 import com.example.iti0302backend.entity.Category;
 import com.example.iti0302backend.entity.Post;
 import com.example.iti0302backend.entity.User;
+import com.example.iti0302backend.exceptions.ApplicationException;
 import com.example.iti0302backend.mapper.PostMapper;
 import com.example.iti0302backend.repository.CategoryRepository;
 import com.example.iti0302backend.repository.PostRepository;
@@ -74,4 +75,9 @@ public class PostService {
         return postMapper.toDtoList(getPage(page, sort).getContent());
     }
 
+    public void deletePostById(Integer id) {
+        Optional<Post> optionalPost = postRepository.findPostById(id);
+        Post product = optionalPost.orElseThrow(() -> new ApplicationException("Invalid post id!"));
+        postRepository.deleteById(product.getId());
+    }
 }

@@ -4,6 +4,7 @@ import com.example.iti0302backend.dto.PostDto;
 import com.example.iti0302backend.entity.Category;
 import com.example.iti0302backend.entity.Post;
 import com.example.iti0302backend.entity.User;
+import com.example.iti0302backend.exceptions.ApplicationException;
 import com.example.iti0302backend.mapper.PostMapper;
 import com.example.iti0302backend.repository.*;
 import lombok.RequiredArgsConstructor;

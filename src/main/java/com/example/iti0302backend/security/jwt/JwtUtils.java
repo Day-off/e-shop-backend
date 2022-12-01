@@ -13,7 +13,11 @@ import java.util.Map;
 @Component
 public class JwtUtils {
 
-    protected static final long EXPIRATIONTIME = 1000 * 60 * 60 * 24 * 10; // 10 days
+    private JwtUtils() {
+
+    }
+
+    protected static final long EXPIRATIONTIME = 864000000; // 10 days
 
     protected static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 

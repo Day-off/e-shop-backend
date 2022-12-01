@@ -1,5 +1,6 @@
 package com.example.iti0302backend.service;
 
+import com.example.iti0302backend.exceptions.ApplicationException;
 import com.example.iti0302backend.dto.UserDto;
 import com.example.iti0302backend.entity.User;
 import com.example.iti0302backend.mapper.UserMapper;
@@ -41,11 +42,11 @@ public class UserService {
 
     public String login(String email, String password) {
         Optional<User> optionalUser = userRepository.findByEmail(email);
-        User user = optionalUser.orElseThrow(() -> new RuntimeException("User not found"));
+        User user = optionalUser.orElseThrow(() -> new ApplicationException("User not found"));
         if (passwordEncoder.matches(password, user.getPassword())) {
             return JwtUtils.generateTokenFromEmail(email);
         } else {
-            throw new RuntimeException("Invalid password!");
+            throw new ApplicationException("Invalid password !");
         }
     }
 }

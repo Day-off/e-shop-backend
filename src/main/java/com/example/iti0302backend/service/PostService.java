@@ -9,6 +9,7 @@ import com.example.iti0302backend.repository.CategoryRepository;
 import com.example.iti0302backend.repository.PostRepository;
 import com.example.iti0302backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class PostService {
 
     private final PostRepository postRepository;
@@ -28,16 +30,26 @@ public class PostService {
     private final PostMapper postMapper;
     private static final int PAGE_SIZE = 2;
 
-    public List<PostDto> getPage() {
+    public List<PostDto> getAll() {
         return postMapper.toDtoList(postRepository.findAll());
     }
 
     public void addPost(PostDto postDto) {
         try {
+            log.warn("find user");
             Optional<User> user = userRepository.findById(postDto.getUserId());
             Post post = postMapper.toPost(postDto);
-            Optional<Category> category = categoryRepository.findById(postDto.getCategoryId());
-            category.ifPresent(post::setCategory);
+
+
+            if (postDto.getCategoryId() != null){
+                log.warn("find category " + postDto.getCategoryId());
+                Optional<Category> category = categoryRepository.findById(postDto.getCategoryId());
+                category.ifPresent(post::setCategory);
+            }
+            else {
+                post.setCategory(null);
+            }
+
 
             user.ifPresent(post::setUser);
 

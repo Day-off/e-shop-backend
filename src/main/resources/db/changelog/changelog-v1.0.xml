@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <property name="now" value="now()" dbms="postgresql"/>
 
     <changeSet id="1" author="Kristina">
         <createTable tableName="users">
@@ -114,5 +117,23 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="addOrders" author="Kristina">
+        <createTable tableName="orders">
+            <column name="order_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user" type="int">
+                <constraints foreignKeyName="customerId" references="users(user_id)"/>
+            </column>
+            <column name="post" type="int">
+                <constraints foreignKeyName="productId" references="posts(post_id)"/>
+            </column>
+            <column name="date" type="date" defaultValueDate="${now}" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="renameColumnInOrder" author="Kristina">
+        <renameColumn tableName="orders" oldColumnName="user" newColumnName="customer"/>
+    </changeSet>
 
 </databaseChangeLog>

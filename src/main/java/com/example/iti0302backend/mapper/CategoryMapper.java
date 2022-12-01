@@ -1,8 +1,8 @@
 package com.example.iti0302backend.mapper;
 
-import com.example.iti0302backend.category.Category;
 import com.example.iti0302backend.dto.CategoryDto;
-import com.example.iti0302backend.post.Post;
+import com.example.iti0302backend.entity.Category;
+import com.example.iti0302backend.entity.Post;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

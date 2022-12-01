@@ -14,5 +14,6 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private List<PostDto> posts;
+    private List<OrderDto> orders;
 
 }

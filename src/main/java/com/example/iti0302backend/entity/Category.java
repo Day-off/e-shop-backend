@@ -1,7 +1,6 @@
-package com.example.iti0302backend.category;
+package com.example.iti0302backend.entity;
 
 
-import com.example.iti0302backend.post.Post;
 import lombok.*;
 
 import javax.persistence.*;

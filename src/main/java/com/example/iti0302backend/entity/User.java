@@ -1,6 +1,5 @@
-package com.example.iti0302backend.user;
+package com.example.iti0302backend.entity;
 
-import com.example.iti0302backend.post.Post;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,7 +17,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "email")
     private String email;
@@ -34,4 +33,7 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Order> orders;
 }

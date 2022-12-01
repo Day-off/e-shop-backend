@@ -1,6 +1,6 @@
 package com.example.iti0302backend.repository;
 
-import com.example.iti0302backend.post.Post;
+import com.example.iti0302backend.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

@@ -1,6 +1,6 @@
 package com.example.iti0302backend.repository;
 
-import com.example.iti0302backend.user.User;
+import com.example.iti0302backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

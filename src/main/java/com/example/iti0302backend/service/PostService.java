@@ -1,19 +1,26 @@
 package com.example.iti0302backend.service;
 
 import com.example.iti0302backend.dto.PostDto;
-import com.example.iti0302backend.map.MapStructMapper;
+import com.example.iti0302backend.entity.Category;
+import com.example.iti0302backend.entity.Post;
+import com.example.iti0302backend.entity.User;
 import com.example.iti0302backend.mapper.PostMapper;
+import com.example.iti0302backend.repository.CategoryRepository;
 import com.example.iti0302backend.repository.PostRepository;
+import com.example.iti0302backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class PostService {
 
     private final PostRepository postRepository;
-    private final MapStructMapper mapstructMapper;
+    private final UserRepository userRepository;
+    private final CategoryRepository categoryRepository;
 
     private final PostMapper postMapper;
 
@@ -23,13 +30,20 @@ public class PostService {
 
     public void addPost(PostDto postDto) {
         try {
-            postRepository.save(postMapper.toPost(postDto));
+            Optional<User> user = userRepository.findById(postDto.getUserId());
+            Post post = postMapper.toPost(postDto);
+            Optional<Category> category = categoryRepository.findById(postDto.getCategoryId());
+            category.ifPresent(post::setCategory);
+
+            user.ifPresent(post::setUser);
+
+            postRepository.save(post);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public List<PostDto> findByHeader(String head) {
-        return mapstructMapper.postListToPostDtoList(postRepository.findPostByHeadContainingIgnoreCase(head));
+        return postMapper.toDtoList(postRepository.findPostByHeadContainingIgnoreCase(head));
     }
 }

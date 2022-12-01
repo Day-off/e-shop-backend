@@ -21,7 +21,6 @@ public class ApplicationConfiguration {
         return new RestTemplate();
     }
 
-
     @Scheduled(fixedDelay = 20000)
     public void printAJoke() {
         String url = "https://www.boredapi.com/api/activity";

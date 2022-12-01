@@ -49,4 +49,16 @@ class PostServiceTest {
         assertEquals(List.of(PostDto.builder().id(123)
                 .head("one two three").description("counting...").build()), result);
     }
+
+    @Test
+    void findByHeader_existingHeader_listOfOnePost() {
+        Post post = Post.builder().id(456).head("four five six").description("counting again...").build();
+        postService.addPost(postMapper.toDto(post));
+        given(postRepository.findPostByHeadContainingIgnoreCase("four five six")).willReturn(List.of(post));
+        var result = postService.findByHeader("four five six");
+        then(postMapper).should().toDtoList(List.of(post));
+        then(postRepository).should().findPostByHeadContainingIgnoreCase("four five six");
+        assertEquals(List.of(PostDto.builder().id(456)
+                .head("four five six").description("counting again...").build()), result);
+    }
 }

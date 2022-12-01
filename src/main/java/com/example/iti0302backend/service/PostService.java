@@ -6,9 +6,7 @@ import com.example.iti0302backend.entity.Post;
 import com.example.iti0302backend.entity.User;
 import com.example.iti0302backend.exceptions.ApplicationException;
 import com.example.iti0302backend.mapper.PostMapper;
-import com.example.iti0302backend.repository.CategoryRepository;
-import com.example.iti0302backend.repository.PostRepository;
-import com.example.iti0302backend.repository.UserRepository;
+import com.example.iti0302backend.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -26,6 +24,7 @@ import java.util.Optional;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final PostCriteriaRepository postCriteriaRepository;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final PostMapper postMapper;
@@ -42,12 +41,11 @@ public class PostService {
             Post post = postMapper.toPost(postDto);
 
 
-            if (postDto.getCategoryId() != null){
+            if (postDto.getCategoryId() != null) {
                 log.warn("find category " + postDto.getCategoryId());
                 Optional<Category> category = categoryRepository.findById(postDto.getCategoryId());
                 category.ifPresent(post::setCategory);
-            }
-            else {
+            } else {
                 post.setCategory(null);
             }
 
@@ -75,9 +73,8 @@ public class PostService {
         return postMapper.toDtoList(getPage(page, sort).getContent());
     }
 
-    public void deletePostById(Integer id) {
-        Optional<Post> optionalPost = postRepository.findPostById(id);
-        Post product = optionalPost.orElseThrow(() -> new ApplicationException("Invalid post id!"));
-        postRepository.deleteById(product.getId());
+    public List<PostDto> search(PostFilter postFilter) {
+        var postList = postCriteriaRepository.search(postFilter);
+        return postMapper.toDtoList(postList);
     }
 }

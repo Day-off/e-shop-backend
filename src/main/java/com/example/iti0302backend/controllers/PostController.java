@@ -4,6 +4,7 @@ import com.example.iti0302backend.dto.PostDto;
 import com.example.iti0302backend.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -14,7 +15,7 @@ public class PostController {
 
     @GetMapping("/api/posts")
     public List<PostDto> getPosts() {
-        return postService.getPosts();
+        return postService.getPage();
     }
 
     @PostMapping("/api/posts")
@@ -27,5 +28,9 @@ public class PostController {
         return postService.findByHeader(head);
     }
 
+    @GetMapping("api/public/{page}&{orderBy}")
+    public List<PostDto> getSortedBy(@PathVariable("page") int page, @PathVariable("orderBy") String orderBy){
+        return postService.getSortedBy(page, orderBy);
+    }
 
 }

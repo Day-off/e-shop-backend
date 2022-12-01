@@ -15,7 +15,7 @@ public class PostController {
 
     @GetMapping("/api/posts")
     public List<PostDto> getPosts() {
-        return postService.getPage();
+        return postService.getAll();
     }
 
     @PostMapping("/api/posts")

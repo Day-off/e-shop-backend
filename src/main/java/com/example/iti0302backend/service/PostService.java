@@ -77,4 +77,10 @@ public class PostService {
         var postList = postCriteriaRepository.search(postFilter);
         return postMapper.toDtoList(postList);
     }
+
+    public void deletePostById(Integer id) {
+        Optional<Post> optionalPost = postRepository.findPostById(id);
+        Post post = optionalPost.orElseThrow(() -> new ApplicationException("Invalid post id!"));
+        postRepository.deleteById(post.getId());
+    }
 }

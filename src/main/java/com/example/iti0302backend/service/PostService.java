@@ -83,4 +83,8 @@ public class PostService {
         Post post = optionalPost.orElseThrow(() -> new ApplicationException("Invalid post id!"));
         postRepository.deleteById(post.getId());
     }
+
+    public void updatePost(int id, String header){
+        postRepository.update(id, header);
+    }
 }

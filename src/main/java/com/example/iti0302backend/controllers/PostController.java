@@ -44,4 +44,9 @@ public class PostController {
         postService.deletePostById(postDto.getId());
     }
 
+    @GetMapping("/api/posts/update")
+    public void updatePost(int id, String header){
+        postService.updatePost(id, header);
+    }
+
 }

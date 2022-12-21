@@ -23,4 +23,9 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Modifying
     @Query(value = "UPDATE posts SET isavailable = false WHERE post_id = :id" ,nativeQuery=true)
     void buy(int id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE posts SET isavailable = true WHERE post_id = :id" ,nativeQuery=true)
+    void unBuy(int id);
 }

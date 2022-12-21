@@ -54,6 +54,11 @@ public class PostController {
         postService.buyPost(id);
     }
 
+   @GetMapping("/api/posts/unBuy")
+    public void unBuy(int id){
+        postService.unBuyPost(id);
+    }
+
 
 
 }

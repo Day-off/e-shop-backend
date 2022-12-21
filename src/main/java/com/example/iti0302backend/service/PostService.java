@@ -102,4 +102,8 @@ public class PostService {
     public void buyPost(int id) {
         postRepository.buy(id);
     }
+
+    public void unBuyPost(int id) {
+        postRepository.unBuy(id);
+    }
 }

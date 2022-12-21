@@ -49,4 +49,11 @@ public class PostController {
         postService.updatePost(id, header);
     }
 
+     @GetMapping("/api/posts/buy")
+    public void buy(int id){
+        postService.buyPost(id);
+    }
+
+
+
 }

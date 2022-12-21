@@ -98,4 +98,8 @@ public class PostService {
     public void updatePost(int id, String header) {
         postRepository.update(id, header);
     }
+
+    public void buyPost(int id) {
+        postRepository.buy(id);
+    }
 }

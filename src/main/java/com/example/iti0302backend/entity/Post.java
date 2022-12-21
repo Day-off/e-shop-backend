@@ -27,6 +27,9 @@ public class Post {
     @Column(name = "image_link")
     private byte[] imageLink;
 
+    @Column(name = "isavailable")
+    private Boolean isAvailable;
+
     @ManyToOne(targetEntity= Category.class)
     @JoinColumn(name = "category")
     private Category category;

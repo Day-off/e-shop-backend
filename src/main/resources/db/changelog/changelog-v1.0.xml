@@ -128,12 +128,19 @@
             <column name="post" type="int">
                 <constraints foreignKeyName="productId" references="posts(post_id)"/>
             </column>
-            <column name="date" type="date" defaultValueDate="${now}" />
+            <column name="date" type="date" defaultValueDate="${now}"/>
         </createTable>
     </changeSet>
 
     <changeSet id="renameColumnInOrder" author="Kristina">
         <renameColumn tableName="orders" oldColumnName="user" newColumnName="customer"/>
     </changeSet>
+
+    <changeSet id="addAvailableColumnToPosts" author="Kristina">
+        <addColumn tableName="posts">
+            <column name="isavailable" type="bool" defaultValueBoolean="true"/>
+        </addColumn>
+    </changeSet>
+
 
 </databaseChangeLog>

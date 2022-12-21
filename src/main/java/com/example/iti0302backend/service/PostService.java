@@ -41,13 +41,8 @@ public class PostService {
             Post post = postMapper.toPost(postDto);
 
 
-            if (postDto.getCategoryId() != null) {
-                log.warn("find category " + postDto.getCategoryId());
-                Optional<Category> category = categoryRepository.findById(postDto.getCategoryId());
-                category.ifPresent(post::setCategory);
-            } else {
-                post.setCategory(null);
-            }
+            setCategory(postDto, post);
+            setDefaultIsAvailable(postDto, post);
 
 
             user.ifPresent(post::setUser);
@@ -55,6 +50,22 @@ public class PostService {
             postRepository.save(post);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void setDefaultIsAvailable(PostDto postDto, Post post) {
+        if (postDto.getIsAvailable() == null) {
+            post.setIsAvailable(true);
+        }
+    }
+
+    private void setCategory(PostDto postDto, Post post) {
+        if (postDto.getCategoryId() != null) {
+            log.warn("find category " + postDto.getCategoryId());
+            Optional<Category> category = categoryRepository.findById(postDto.getCategoryId());
+            category.ifPresent(post::setCategory);
+        } else {
+            post.setCategory(null);
         }
     }
 
@@ -84,7 +95,7 @@ public class PostService {
         postRepository.deleteById(post.getId());
     }
 
-    public void updatePost(int id, String header){
+    public void updatePost(int id, String header) {
         postRepository.update(id, header);
     }
 }

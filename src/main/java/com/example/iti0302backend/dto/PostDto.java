@@ -12,4 +12,5 @@ public class PostDto {
     private byte[] imageLink;
     private Integer userId;
     private Integer categoryId;
+    private Boolean isAvailable;
 }

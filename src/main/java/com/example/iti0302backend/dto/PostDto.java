@@ -9,8 +9,8 @@ public class PostDto {
     private Integer id;
     private String head;
     private String description;
-    private byte[] imageLink;
     private Integer userId;
     private Integer categoryId;
     private Boolean isAvailable;
+    private Integer imageId;
 }

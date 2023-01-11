@@ -142,5 +142,32 @@
         </addColumn>
     </changeSet>
 
+    <changeSet author="Liza" id="imageTable">
+        <createTable tableName="image">
+            <column name="id"  type="SERIAL" autoIncrement="true">
+                <constraints  nullable="false"  primaryKey="true"  unique="true"/>
+            </column>
+            <column name="name"  type="text" />
+            <column name="original_file_name"  type="text" />
+            <column name="size"  type="int" />
+            <column name="content_type"  type="text" />
+            <column name="bytes"  type="bytea" />
+        </createTable>
+        <addColumn tableName="posts">
+            <column name="image_id" type="int">
+                <constraints nullable="true" foreignKeyName="fk_product_image" references="image(id)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="Liza" id="dropColumnImageLink">
+        <dropColumn
+                columnName="image_link"
+                schemaName="public"
+                tableName="posts">
+        </dropColumn>
+    </changeSet>
+
+
 
 </databaseChangeLog>

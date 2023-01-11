@@ -2,6 +2,7 @@ package com.example.iti0302backend.service;
 
 import com.example.iti0302backend.dto.PostDto;
 import com.example.iti0302backend.entity.Category;
+import com.example.iti0302backend.entity.Image;
 import com.example.iti0302backend.entity.Post;
 import com.example.iti0302backend.entity.User;
 import com.example.iti0302backend.exceptions.ApplicationException;
@@ -24,6 +25,8 @@ import java.util.Optional;
 public class PostService {
 
     private final PostRepository postRepository;
+
+    private final ImageRepository imageRepository;
     private final PostCriteriaRepository postCriteriaRepository;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
@@ -46,6 +49,8 @@ public class PostService {
 
 
             user.ifPresent(post::setUser);
+            Image image = imageRepository.findTopByOrderByIdDesc();
+            post.setImageId(image.getId());
 
             postRepository.save(post);
         } catch (Exception e) {

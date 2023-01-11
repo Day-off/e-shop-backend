@@ -24,9 +24,6 @@ public class Post {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "image_link")
-    private byte[] imageLink;
-
     @Column(name = "isavailable")
     private Boolean isAvailable;
 
@@ -38,5 +35,11 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "image_id")
+    private Integer imageId;
 
+    @ToString.Exclude
+    @OneToOne
+    @JoinColumn(name = "image_id", insertable=false, updatable=false)
+    private Image image;
 }

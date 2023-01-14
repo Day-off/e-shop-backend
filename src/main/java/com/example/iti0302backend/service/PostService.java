@@ -111,4 +111,14 @@ public class PostService {
     public void unBuyPost(int id) {
         postRepository.unBuy(id);
     }
+
+    public List<PostDto> paginateProductsByUserId(int page, String orderBy, Integer userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        User user = optionalUser.orElseThrow(() -> new ApplicationException("User is not found!"));
+        Sort sort = Sort.by(orderBy).descending();
+        Pageable pageRequest = PageRequest.of(page, PAGE_SIZE, sort);
+        List<Post> posts = postRepository.findPostByUser(user, pageRequest);
+        return postMapper.toDtoList(posts);
+    }
+
 }

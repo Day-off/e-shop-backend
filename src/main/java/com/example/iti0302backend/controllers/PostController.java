@@ -38,7 +38,6 @@ public class PostController {
         PostFilter postFilter = new PostFilter(page, header, orderBy, order);
         return postService.search(postFilter);
     }
-
     @DeleteMapping("/api/posts/delete")
     public void deletePost(@RequestBody PostDto postDto) {
         postService.deletePostById(postDto.getId());
@@ -59,6 +58,8 @@ public class PostController {
         postService.unBuyPost(id);
     }
 
-
-
+    @GetMapping("api/public/mypost")
+    public List<PostDto> myPostSearch(int page, String orderBy, Integer userId){
+        return postService.paginateProductsByUserId(page, orderBy, userId);
+    }
 }

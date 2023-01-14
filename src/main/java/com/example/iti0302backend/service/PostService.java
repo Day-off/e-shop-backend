@@ -31,7 +31,7 @@ public class PostService {
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final PostMapper postMapper;
-    private static final int PAGE_SIZE = 2;
+    private static final int PAGE_SIZE = 1;
 
     public List<PostDto> getAll() {
         return postMapper.toDtoList(postRepository.findAll());

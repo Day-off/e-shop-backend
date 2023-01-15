@@ -38,7 +38,7 @@ public class PostController {
         PostFilter postFilter = new PostFilter(page, header, orderBy, order);
         return postService.search(postFilter);
     }
-    @DeleteMapping("/api/posts/delete")
+    @PostMapping("/api/public/delete")
     public void deletePost(@RequestBody PostDto postDto) {
         postService.deletePostById(postDto.getId());
     }

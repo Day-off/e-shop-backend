@@ -44,7 +44,7 @@ public class UserService {
         Optional<User> optionalUser = userRepository.findByEmail(email);
         User user = optionalUser.orElseThrow(() -> new ApplicationException("User not found"));
         if (passwordEncoder.matches(password, user.getPassword())) {
-            return JwtUtils.generateTokenFromEmail(email, user.getId());
+            return JwtUtils.generateTokenFromEmail(email, user.getId(), user.getFirstName(), user.getLastName());
         } else {
             throw new ApplicationException("Invalid password !");
         }

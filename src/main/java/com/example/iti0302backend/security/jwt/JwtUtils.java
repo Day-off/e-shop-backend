@@ -21,10 +21,12 @@ public class JwtUtils {
 
     protected static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    public static String generateTokenFromEmail(String email, Integer id) {
+    public static String generateTokenFromEmail(String email, Integer id, String firstname, String lastname) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("email", email);
         claims.put("id", id);
+        claims.put("firstname", firstname);
+        claims.put("lastname", lastname);
         return Jwts.builder()
                 .setSubject("subject")
                 .addClaims(claims)

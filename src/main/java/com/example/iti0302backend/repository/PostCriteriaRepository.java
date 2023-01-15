@@ -40,7 +40,7 @@ public class PostCriteriaRepository {
 
         var entityManagerQuery = entityManager.createQuery(postQuery);
         entityManagerQuery.setFirstResult(filter.getFirstResult());
-        entityManagerQuery.setMaxResults(10);
+        entityManagerQuery.setMaxResults(2);
 
         return entityManagerQuery.getResultList();
 

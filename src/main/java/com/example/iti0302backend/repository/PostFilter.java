@@ -19,6 +19,6 @@ public class PostFilter {
     private String order;
 
     public int getFirstResult() {
-        return page * 10;
+        return page * 2;
     }
 }

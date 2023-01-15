@@ -1,7 +1,6 @@
 package com.example.iti0302backend.service;
 
 import com.example.iti0302backend.entity.Image;
-import com.example.iti0302backend.exceptions.ApplicationException;
 import com.example.iti0302backend.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +20,6 @@ import java.util.Optional;
 public class ImageService {
 
     private final ImageRepository imageRepository;
-    public static final String EXCEPTION_IMAGE_NOT_FOUND_MESSAGE = "Image not found";
 
     public void saveImage(MultipartFile file) throws IOException {
         Image image = Image.builder()
@@ -37,7 +35,11 @@ public class ImageService {
 
     public ResponseEntity<Object> getImageById(Integer imageId) {
         Optional<Image> imageOptional = imageRepository.findById(imageId);
-        Image image = imageOptional.orElseThrow(() -> new ApplicationException(EXCEPTION_IMAGE_NOT_FOUND_MESSAGE));
+        if (imageOptional.isEmpty()){
+            log.info("image not exist");
+            return null;
+        }
+        Image image = imageOptional.get();
         log.info("Getting image {} by id {}", image, imageId);
         return ResponseEntity.ok()
                 .header("fileName", image.getOriginalFileName())

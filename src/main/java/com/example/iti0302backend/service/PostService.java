@@ -31,7 +31,7 @@ public class PostService {
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final PostMapper postMapper;
-    private static final int PAGE_SIZE = 1;
+    private static final int PAGE_SIZE = 2;
 
     public List<PostDto> getAll() {
         return postMapper.toDtoList(postRepository.findAll());
@@ -50,7 +50,11 @@ public class PostService {
 
             user.ifPresent(post::setUser);
             Image image = imageRepository.findTopByOrderByIdDesc();
-            post.setImageId(image.getId());
+            if (image != null) {
+                post.setImageId(image.getId());
+            } else {
+                post.setImageId(null);
+            }
 
             postRepository.save(post);
         } catch (Exception e) {

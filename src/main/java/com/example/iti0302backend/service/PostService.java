@@ -81,15 +81,11 @@ public class PostService {
         return postMapper.toDtoList(postRepository.findPostByHeadContainingIgnoreCase(head));
     }
 
-
-    private Page<Post> getPage(int page, Sort sort) {
-        Pageable pageRequest = PageRequest.of(page, PAGE_SIZE, sort);
-        return postRepository.findAll(pageRequest);
-    }
-
     public List<PostDto> getSortedBy(int page, String orderBy) {
         Sort sort = Sort.by(orderBy).ascending();
-        return postMapper.toDtoList(getPage(page, sort).getContent());
+        Pageable pageRequest = PageRequest.of(page, PAGE_SIZE, sort);
+        List<Post> posts = postRepository.findPostByIsAvailableIsTrue(pageRequest);
+        return postMapper.toDtoList(posts);
     }
 
     public List<PostDto> search(PostFilter postFilter) {

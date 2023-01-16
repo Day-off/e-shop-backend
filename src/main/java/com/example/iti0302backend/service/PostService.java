@@ -1,10 +1,7 @@
 package com.example.iti0302backend.service;
 
 import com.example.iti0302backend.dto.PostDto;
-import com.example.iti0302backend.entity.Category;
-import com.example.iti0302backend.entity.Image;
-import com.example.iti0302backend.entity.Post;
-import com.example.iti0302backend.entity.User;
+import com.example.iti0302backend.entity.*;
 import com.example.iti0302backend.exceptions.ApplicationException;
 import com.example.iti0302backend.mapper.PostMapper;
 import com.example.iti0302backend.repository.*;
@@ -25,6 +22,8 @@ import java.util.Optional;
 public class PostService {
 
     private final PostRepository postRepository;
+
+    private final OrderRepository orderRepository;
 
     private final ImageRepository imageRepository;
     private final PostCriteriaRepository postCriteriaRepository;
@@ -108,12 +107,16 @@ public class PostService {
         postRepository.update(id, header);
     }
 
-    public void buyPost(int id) {
-        postRepository.buy(id);
+
+    public void buyPost(int postId, int userId) {
+        postRepository.buy(postId);
+        orderRepository.createOrder(postId, userId);
     }
 
-    public void unBuyPost(int id) {
-        postRepository.unBuy(id);
+    public void unBuyPostId(int orderId) {
+        Optional<Order> order = orderRepository.findById(orderId);
+        order.ifPresent(value -> postRepository.unBuy(value.getPost().getId()));
+        order.ifPresent(value -> orderRepository.deleteById(value.getId()));
     }
 
     public List<PostDto> paginateProductsByUserId(int page, String orderBy, Integer userId) {

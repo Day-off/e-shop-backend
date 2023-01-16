@@ -4,12 +4,14 @@ import com.example.iti0302backend.dto.PostDto;
 import com.example.iti0302backend.repository.PostFilter;
 import com.example.iti0302backend.service.PostService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@Slf4j
 public class PostController {
 
     private final PostService postService;
@@ -48,16 +50,15 @@ public class PostController {
         postService.updatePost(id, header);
     }
 
-     @GetMapping("/api/posts/buy")
-    public void buy(int id){
-        postService.buyPost(id);
+    @GetMapping("/api/posts/buy")
+    public void buy(int postId, int userId){
+        postService.buyPost(postId, userId);
     }
 
-   @GetMapping("/api/posts/unBuy")
-    public void unBuy(int id){
-        postService.unBuyPost(id);
+    @DeleteMapping("/api/posts/deleteOrder")
+    public void deleteFromOrders(int orderId){
+        postService.unBuyPostId(orderId);
     }
-
     @GetMapping("api/public/mypost")
     public List<PostDto> myPostSearch(int page, String orderBy, Integer userId){
         return postService.paginateProductsByUserId(page, orderBy, userId);

@@ -17,6 +17,8 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     Optional<Post> findPostById(Integer id);
     List<Post> findPostByUser(User user, Pageable pageable);
 
+    List<Post> findPostByIsAvailableIsTrue(Pageable pageable);
+
 
     @Transactional
     @Modifying

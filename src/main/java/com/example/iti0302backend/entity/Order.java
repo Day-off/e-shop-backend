@@ -39,4 +39,7 @@ public class Order {
     @JoinColumn(name = "image", insertable=false, updatable=false)
     private Image image;
 
+    @Column(name = "email")
+    private String email;
+
 }

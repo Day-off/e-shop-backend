@@ -17,7 +17,7 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @GetMapping("api/orders/")
+    @GetMapping("api/public/orders/")
     public List<OrderDto> myPostSearch(int page, String orderBy, Integer userId){
         return orderService.getSortedBy(page, orderBy, userId);
     }

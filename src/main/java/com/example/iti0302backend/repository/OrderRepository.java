@@ -16,7 +16,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "insert into orders (customer, post) values (:userId, :postId)" ,nativeQuery=true)
-    void createOrder(int postId, int userId);
+    @Query(value = "insert into orders (customer, post, image) values (:userId, :postId, :imageId)" ,nativeQuery=true)
+    void createOrder(int postId, int userId, int imageId);
 
 }

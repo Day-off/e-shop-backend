@@ -11,5 +11,6 @@ public class OrderDto {
     private Integer userId;
     private Integer postId;
     private Date date;
+    private Integer imageId;
 
 }

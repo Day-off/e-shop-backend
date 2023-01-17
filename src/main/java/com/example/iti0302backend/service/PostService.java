@@ -7,7 +7,6 @@ import com.example.iti0302backend.mapper.PostMapper;
 import com.example.iti0302backend.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -104,9 +103,9 @@ public class PostService {
     }
 
 
-    public void buyPost(int postId, int userId) {
+    public void buyPost(int postId, int userId, int imageId) {
         postRepository.buy(postId);
-        orderRepository.createOrder(postId, userId);
+        orderRepository.createOrder(postId, userId, imageId);
     }
 
     public void unBuyPostId(int orderId) {
@@ -123,5 +122,4 @@ public class PostService {
         List<Post> posts = postRepository.findPostByUser(user, pageRequest);
         return postMapper.toDtoList(posts);
     }
-
 }

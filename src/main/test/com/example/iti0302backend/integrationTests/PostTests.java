@@ -1,6 +1,5 @@
 package com.example.iti0302backend.integrationTests;
 
-import com.example.iti0302backend.repository.UserRepository;
 import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,7 +101,6 @@ class PostTests extends AbstractIntegrationTes {
     void createOrder() throws Exception {
         mvc.perform(get("/api/posts/buy?postId=0&userId=0&imageId=0").with(user("user")))
                 .andExpect(status().isOk());
-
     }
     @Test
     void deleteOrder() throws Exception {

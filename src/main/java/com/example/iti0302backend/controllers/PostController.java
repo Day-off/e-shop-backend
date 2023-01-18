@@ -59,7 +59,7 @@ public class PostController {
     public void deleteFromOrders(int orderId){
         postService.unBuyPostId(orderId);
     }
-    @GetMapping("api/public/mypost")
+    @GetMapping("/api/public/mypost")
     public List<PostDto> myPostSearch(int page, String orderBy, Integer userId){
         return postService.paginateProductsByUserId(page, orderBy, userId);
     }

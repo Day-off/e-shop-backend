@@ -7,7 +7,6 @@ import com.example.iti0302backend.mapper.PostMapper;
 import com.example.iti0302backend.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -92,12 +92,12 @@ public class PostService {
         Sort sort = Sort.by(orderBy).ascending();
         Pageable pageRequest = PageRequest.of(page, PAGE_SIZE, sort);
         List<Post> posts = postRepository.findPostByIsAvailableIsTrue(pageRequest);
-        return postMapper.toDtoList(posts);
+        return postMapper.toDtoList(posts.stream().filter(Post::getIsAvailable).collect(Collectors.toList()));
     }
 
     public List<PostDto> search(PostFilter postFilter) {
         var postList = postCriteriaRepository.search(postFilter);
-        return postMapper.toDtoList(postList);
+        return postMapper.toDtoList(postList.stream().filter(Post::getIsAvailable).collect(Collectors.toList()));
     }
 
     public void deletePostById(Integer id) {

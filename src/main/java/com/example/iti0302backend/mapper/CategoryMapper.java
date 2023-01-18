@@ -11,6 +11,7 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = PostMapper.class)
 public interface CategoryMapper {
 
+
     CategoryDto toDto(Category category, List<Post> posts);
 
     Category toCategory(CategoryDto categoryDto);

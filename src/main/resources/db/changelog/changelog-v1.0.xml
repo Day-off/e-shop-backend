@@ -169,5 +169,34 @@
     </changeSet>
 
 
+    <changeSet id="addImageIdColumnToOrders" author="Liza">
+        <addColumn tableName="orders">
+            <column name="image_id" type="int">
+                <constraints nullable="true" foreignKeyName="fk_product_image" references="image(id)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="renameColumnImageId" author="Liza">
+        <renameColumn
+                columnDataType="int"
+                newColumnName="image"
+                oldColumnName="image_id"
+                schemaName="public"
+                tableName="orders"/>
+    </changeSet>
+
+    <changeSet id="addSellerEmailToPosts" author="Liza">
+        <addColumn tableName="posts">
+            <column name="email" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="addSellerEmailToOrders" author="Liza">
+        <addColumn tableName="orders">
+            <column name="email" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+
 
 </databaseChangeLog>

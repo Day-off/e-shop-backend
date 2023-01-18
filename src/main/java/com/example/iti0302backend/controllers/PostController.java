@@ -51,8 +51,8 @@ public class PostController {
     }
 
     @GetMapping("/api/posts/buy")
-    public void buy(int postId, int userId){
-        postService.buyPost(postId, userId);
+    public void buy(int postId, int userId, int imageId){
+        postService.buyPost(postId, userId, imageId);
     }
 
     @DeleteMapping("/api/posts/deleteOrder")

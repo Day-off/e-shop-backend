@@ -42,4 +42,7 @@ public class Post {
     @OneToOne
     @JoinColumn(name = "image_id", insertable=false, updatable=false)
     private Image image;
+
+    @Column(name = "email")
+    private String email;
 }

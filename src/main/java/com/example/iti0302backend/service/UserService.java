@@ -19,8 +19,6 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    private final JwtUtils jwtUtils;
-
     private final UserMapper userMapper;
 
     private final PasswordEncoder passwordEncoder;
@@ -48,5 +46,10 @@ public class UserService {
         } else {
             throw new ApplicationException("Invalid password !");
         }
+    }
+
+    public UserDto getUserById(int id){
+        Optional<User> user =  userRepository.findById(id);
+        return user.map(userMapper::toDto).orElse(null);
     }
 }

@@ -31,7 +31,7 @@ class ImageTest extends AbstractIntegrationTes {
                         .accept("application/json"))
                         .andExpect(status().isOk());
 
-        mvc.perform(get("/api/public/images/0")).andExpect(status().isOk());
+        mvc.perform(get("/api/public/images/1")).andExpect(status().isOk());
     }
 
 }

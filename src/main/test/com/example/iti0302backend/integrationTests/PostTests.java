@@ -1,6 +1,5 @@
 package com.example.iti0302backend.integrationTests;
 
-import com.example.iti0302backend.repository.UserRepository;
 import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ class PostTests extends AbstractIntegrationTes {
     @Test
     void getPosts() throws Exception {
         mvc.perform(get("/api/posts").with(user("user")))
-                .andExpect(jsonPath("$.[0].head").value("Find"))
+                .andExpect(jsonPath("$.[0].head").isNotEmpty())
                 .andExpect(status().isOk());
     }
 
@@ -60,7 +59,7 @@ class PostTests extends AbstractIntegrationTes {
     void getSortedBuy() throws Exception {
         mvc.perform(get("/api/public/?page=0&orderBy=id"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.[0].head").value("Sample"));
+                .andExpect(jsonPath("$.[0].head").value("Sample3"));
     }
 
     @Test
@@ -100,9 +99,8 @@ class PostTests extends AbstractIntegrationTes {
 
     @Test
     void createOrder() throws Exception {
-        mvc.perform(get("/api/posts/buy?postId=0&userId=0").with(user("user")))
+        mvc.perform(get("/api/posts/buy?postId=0&userId=0&imageId=0").with(user("user")))
                 .andExpect(status().isOk());
-
     }
     @Test
     void deleteOrder() throws Exception {

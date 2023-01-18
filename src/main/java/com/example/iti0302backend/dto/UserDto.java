@@ -1,11 +1,13 @@
 package com.example.iti0302backend.dto;
 
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@Builder
 public class UserDto {
 
     private Long id;

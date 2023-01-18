@@ -28,4 +28,9 @@ public class UserController {
         return userService.login(userDto.getEmail(), userDto.getPassword());
     }
 
+    @GetMapping("/api/user")
+    public UserDto getUserById(int id){
+        return userService.getUserById(id);
+    }
+
 }

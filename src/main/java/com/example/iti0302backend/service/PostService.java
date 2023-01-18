@@ -47,15 +47,16 @@ public class PostService {
 
 
             user.ifPresent(post::setUser);
-            Image image = imageRepository.findTopByOrderByIdDesc();
-            if (image != null) {
+            if (post.getImageId() != null) {
+                Image image = imageRepository.findTopByOrderByIdDesc();
                 post.setImageId(image.getId());
             } else {
                 post.setImageId(null);
             }
 
+            log.info("Post saved");
             postRepository.save(post);
-        } catch (Exception e) {
+        } catch (ApplicationException e) {
             e.printStackTrace();
         }
     }
@@ -80,6 +81,17 @@ public class PostService {
         return postMapper.toDtoList(postRepository.findPostByHeadContainingIgnoreCase(head));
     }
 
+    public PostDto findById(int id) {
+        Optional<Post> post = postRepository.findById(id);
+        return post.map(postMapper::toDto).orElse(null);
+    }
+
+
+    private Page<Post> getPage(int page, Sort sort) {
+        Pageable pageRequest = PageRequest.of(page, PAGE_SIZE, sort);
+        return postRepository.findAll(pageRequest);
+    }
+
     public List<PostDto> getSortedBy(int page, String orderBy) {
         Sort sort = Sort.by(orderBy).ascending();
         Pageable pageRequest = PageRequest.of(page, PAGE_SIZE, sort);
@@ -94,8 +106,11 @@ public class PostService {
 
     public void deletePostById(Integer id) {
         Optional<Post> optionalPost = postRepository.findPostById(id);
-        Post post = optionalPost.orElseThrow(() -> new ApplicationException("Invalid post id!"));
-        postRepository.deleteById(post.getId());
+        if (optionalPost.isPresent()){
+            postRepository.deleteById(optionalPost.get().getId());
+        }else {
+            log.error("invalid id or post already delete!");
+        }
     }
 
     public void updatePost(int id, String header) {

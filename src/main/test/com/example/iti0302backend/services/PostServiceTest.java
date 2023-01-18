@@ -1,4 +1,4 @@
-package com.example.iti0302backend.service;
+package com.example.iti0302backend.services;
 
 import com.example.iti0302backend.dto.PostDto;
 import com.example.iti0302backend.entity.Post;
@@ -7,6 +7,7 @@ import com.example.iti0302backend.mapper.PostMapperImpl;
 import com.example.iti0302backend.repository.CategoryRepository;
 import com.example.iti0302backend.repository.PostRepository;
 import com.example.iti0302backend.repository.UserRepository;
+import com.example.iti0302backend.service.PostService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

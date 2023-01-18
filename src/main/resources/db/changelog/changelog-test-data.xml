@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <include file="db/changelog/changelog-root.xml"/>
+
+
+    <changeSet id="CategoryTest" author="Kristina">
+        <insert tableName="category">
+            <column name="type" value="Animals"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="CategoryTest2" author="Kristina">
+        <insert tableName="category">
+            <column name="type" value="House"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="UserTest" author="Kristina">
+        <insert tableName="users">
+            <column name="email" value="test1@gmail.com"/>
+            <column name="firstname" value="Test1"/>
+            <column name="lastname" value="test"/>
+            <column name="user_id" value="0"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="PostTest" author="Kristina">
+        <insert tableName="posts">
+            <column name="user_id" value="0"/>
+            <column name="head" value="Sample"/>
+            <column name="description" value="sample"/>
+            <column name="post_id" value="0"/>
+            <column name="image_id" value="null"/>
+        </insert>
+
+    </changeSet>
+
+    <changeSet id="PostTest1" author="Kristina">
+        <insert tableName="posts">
+            <column name="user_id" value="0"/>
+            <column name="head" value="Sample1"/>
+            <column name="description" value="sample1"/>
+            <column name="post_id" value="2"/>
+            <column name="image_id" value="null"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="SearchPost" author="Kristina">
+        <insert tableName="posts">
+            <column name="user_id" value="0"/>
+            <column name="head" value="Find"/>
+            <column name="description" value="sample"/>
+            <column name="post_id" value="3"/>
+            <column name="image_id" value="null"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="UpdatePost" author="Kristina">
+        <insert tableName="posts">
+            <column name="user_id" value="0"/>
+            <column name="head" value="Find"/>
+            <column name="description" value="sample"/>
+            <column name="post_id" value="4"/>
+            <column name="image_id" value="null"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="PostWithCategory" author="Kristina">
+        <insert tableName="posts">
+            <column name="user_id" value="0"/>
+            <column name="head" value="PostWithCategory"/>
+            <column name="description" value="sample"/>
+            <column name="post_id" value="5"/>
+            <column name="image_id" value="null"/>
+            <column name="category" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="OrderTest" author="Kristina">
+        <insert tableName="orders">
+            <column name="customer" value="0"/>
+            <column name="order_id" value="0"/>
+            <column name="post" value="0"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

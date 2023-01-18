@@ -26,12 +26,12 @@ public class PostController {
         postService.addPost(postDto);
     }
 
-    @GetMapping("/{head}")
-    public List<PostDto> getById(@PathVariable("head") String head) {
-        return postService.findByHeader(head);
+    @GetMapping("/api/findById")
+    public PostDto getById(int id) {
+        return postService.findById(id);
     }
 
-    @GetMapping("api/public/")
+    @GetMapping("/api/public/")
     public List<PostDto> getSortedBy(int page, String orderBy){
         return postService.getSortedBy(page, orderBy);
     }

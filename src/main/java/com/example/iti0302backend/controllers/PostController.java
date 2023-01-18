@@ -35,7 +35,7 @@ public class PostController {
     public List<PostDto> getSortedBy(int page, String orderBy){
         return postService.getSortedBy(page, orderBy);
     }
-    @GetMapping("api/public")
+    @GetMapping("/api/public")
     public List<PostDto> getSearch(int page, String orderBy, String header, String order){
         PostFilter postFilter = new PostFilter(page, header, orderBy, order);
         return postService.search(postFilter);
@@ -59,7 +59,7 @@ public class PostController {
     public void deleteFromOrders(int orderId){
         postService.unBuyPostId(orderId);
     }
-    @GetMapping("api/public/mypost")
+    @GetMapping("/api/public/mypost")
     public List<PostDto> myPostSearch(int page, String orderBy, Integer userId){
         return postService.paginateProductsByUserId(page, orderBy, userId);
     }

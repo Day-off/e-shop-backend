@@ -5,6 +5,7 @@ import com.example.iti0302backend.entity.Post;
 import com.example.iti0302backend.mapper.PostMapper;
 import com.example.iti0302backend.mapper.PostMapperImpl;
 import com.example.iti0302backend.repository.CategoryRepository;
+import com.example.iti0302backend.repository.ImageRepository;
 import com.example.iti0302backend.repository.PostRepository;
 import com.example.iti0302backend.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,9 @@ class PostServiceTest {
 
     @Mock
     private CategoryRepository categoryRepository;
+
+    @Mock
+    private ImageRepository imageRepository;
 
     @Spy
     private PostMapper postMapper = new PostMapperImpl();

@@ -30,4 +30,15 @@ public class Order {
     @Column(name = "date")
     private Date date;
 
+    @Column(name = "image")
+    private Integer imageId;
+
+    @ToString.Exclude
+    @OneToOne
+    @JoinColumn(name = "image", insertable=false, updatable=false)
+    private Image image;
+
+    @Column(name = "email")
+    private String email;
+
 }

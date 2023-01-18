@@ -13,4 +13,5 @@ public class PostDto {
     private Integer categoryId;
     private Boolean isAvailable;
     private Integer imageId;
+    private String email;
 }

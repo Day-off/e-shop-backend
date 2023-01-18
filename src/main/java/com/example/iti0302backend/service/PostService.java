@@ -7,7 +7,6 @@ import com.example.iti0302backend.mapper.PostMapper;
 import com.example.iti0302backend.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -95,7 +94,9 @@ public class PostService {
 
     public List<PostDto> getSortedBy(int page, String orderBy) {
         Sort sort = Sort.by(orderBy).ascending();
-        return postMapper.toDtoList(getPage(page, sort).getContent());
+        Pageable pageRequest = PageRequest.of(page, PAGE_SIZE, sort);
+        List<Post> posts = postRepository.findPostByIsAvailableIsTrue(pageRequest);
+        return postMapper.toDtoList(posts);
     }
 
     public List<PostDto> search(PostFilter postFilter) {
@@ -117,9 +118,9 @@ public class PostService {
     }
 
 
-    public void buyPost(int postId, int userId) {
+    public void buyPost(int postId, int userId, int imageId) {
         postRepository.buy(postId);
-        orderRepository.createOrder(postId, userId);
+        orderRepository.createOrder(postId, userId, imageId);
     }
 
     public void unBuyPostId(int orderId) {
@@ -136,5 +137,4 @@ public class PostService {
         List<Post> posts = postRepository.findPostByUser(user, pageRequest);
         return postMapper.toDtoList(posts);
     }
-
 }

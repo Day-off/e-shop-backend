@@ -13,10 +13,12 @@ public interface PostMapper {
 
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "category.id", target = "categoryId")
+    @Mapping(source = "user.email", target = "email")
     PostDto toDto(Post post);
 
     @Mapping(source = "userId", target = "user.id")
     @Mapping(source = "categoryId", target = "category.id")
+    @Mapping(source = "email", target = "user.email")
     Post toPost(PostDto postDto);
 
     List<PostDto> toDtoList(List<Post> posts);

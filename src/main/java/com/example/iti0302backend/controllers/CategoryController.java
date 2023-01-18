@@ -25,4 +25,9 @@ public class CategoryController {
         return categoryService.findById(id);
     }
 
+    @PostMapping("/api/public/category")
+    public void registerNewEmployee(@RequestBody CategoryDto categoryDto) {
+        categoryService.addCategory(categoryDto);
+    }
+
 }

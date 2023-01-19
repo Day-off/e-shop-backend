@@ -66,4 +66,13 @@ class OrderDtoTest {
         var result = dto.getImageId();
         assertEquals(1, result);
     }
+
+    @Test
+    void getEmail_correctEmail() {
+        Order order = new Order();
+        OrderDto dto = orderMapper.toDto(order);
+        dto.setEmail("a@gmail.com");
+        var result = dto.getEmail();
+        assertEquals("a@gmail.com", result);
+    }
 }

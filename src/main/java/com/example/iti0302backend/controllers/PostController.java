@@ -51,7 +51,7 @@ public class PostController {
     }
 
     @GetMapping("/api/posts/buy")
-    public void buy(int postId, int userId, int imageId){
+    public void buy(int postId, int userId, Integer imageId){
         postService.buyPost(postId, userId, imageId);
     }
 

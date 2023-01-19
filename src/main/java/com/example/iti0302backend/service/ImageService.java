@@ -21,7 +21,7 @@ public class ImageService {
 
     private final ImageRepository imageRepository;
 
-    public void saveImage(MultipartFile file) throws IOException {
+    public int saveImage(MultipartFile file) throws IOException {
         Image image = Image.builder()
                 .name(file.getName())
                 .originalFileName(file.getOriginalFilename())
@@ -30,7 +30,7 @@ public class ImageService {
                 .bytes(file.getBytes())
                 .build();
         log.info("Saving image {}", image);
-        imageRepository.save(image);
+        return imageRepository.save(image).getId();
     }
 
     public ResponseEntity<Object> getImageById(Integer imageId) {

@@ -14,8 +14,8 @@ public class ImageController {
     private final ImageService imageService;
 
     @PostMapping("/api/public/images")
-    public void saveImage(@RequestParam("file") MultipartFile file) throws IOException {
-        imageService.saveImage(file);
+    public int saveImage(@RequestParam("file") MultipartFile file) throws IOException {
+        return imageService.saveImage(file);
     }
 
     @GetMapping("/api/public/images/{imageId}")

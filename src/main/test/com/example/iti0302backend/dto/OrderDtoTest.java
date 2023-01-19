@@ -9,7 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-
+import java.time.Instant;
+import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,5 +45,15 @@ class OrderDtoTest {
         OrderDto dto = orderMapper.toDto(order);
         var result = dto.getPostId();
         assertEquals(1, result);
+    }
+
+    @Test
+    void getDate_correctDate() {
+        Order order = new Order();
+        Date date = Date.from(Instant.now());
+        order.setDate(date);
+        OrderDto dto = orderMapper.toDto(order);
+        var result = dto.getDate();
+        assertEquals(date, result);
     }
 }

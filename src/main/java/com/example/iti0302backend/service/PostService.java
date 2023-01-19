@@ -114,7 +114,7 @@ public class PostService {
     }
 
 
-    public void buyPost(int postId, int userId, int imageId) {
+    public void buyPost(int postId, int userId, Integer imageId) {
         postRepository.buy(postId);
         orderRepository.createOrder(postId, userId, imageId);
     }

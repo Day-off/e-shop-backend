@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -55,5 +56,14 @@ class OrderDtoTest {
         OrderDto dto = orderMapper.toDto(order);
         var result = dto.getDate();
         assertEquals(date, result);
+    }
+
+    @Test
+    void getImageId_correctImageId() {
+        Order order = new Order();
+        OrderDto dto = orderMapper.toDto(order);
+        dto.setImageId(1);
+        var result = dto.getImageId();
+        assertEquals(1, result);
     }
 }

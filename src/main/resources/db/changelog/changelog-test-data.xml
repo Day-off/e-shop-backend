@@ -91,11 +91,4 @@
         </insert>
     </changeSet>
 
-    <changeSet id="TestImage" author="Kristina">
-        <insert tableName="image">
-            <column name="id" value="0"/>
-            <column name="name" value="emptyImage"/>
-        </insert>
-    </changeSet>
-
 </databaseChangeLog>

@@ -1,21 +1,44 @@
-**Backend project readme.** 
+## Backend for e-Shop
+### Technologies used:
+- Java
+- Spring Boot
+- Lombok
+- Mapstruct
+- Liquibase
+- Docker 
+- Postgresql
+- Maven
 
-In order to run our website we need firstly to run frontend on server http://team5.hopto.org and then backend on server http://team5.hopto.org/api/hello
-In order to run locally, we need firstly to set up properties and make docker-compose up for backend and for frontend docker-compose up.
+### Idea:
+E-commission shop. In which the following functions are implemented.
+- User registration
+- User login
+- Create a post
+- Remove post
+- Edit post
+- Adding a picture to a post
+- Ability to place an order and book a product
+- Remove order and cancel product reservation
+- Search posts by title
+- Filter posts by category
 
-1. We have 3 different components in our project: controller, service, post.
-2. Backend is deployed to server using nginx reverse proxy.
-3. Database is deployed to server
-4. Domain name is added to our ip server 193.40.255.30 and logic for writing "hello" on our website is implemented and it is possibe to check using link http://team5.hopto.org/api/hello
-5. Here will be our logic description in future.
+## Backend Installation guide
+1.Install dependencies and Docker (Linux/Mac)
+- Update system `sudo apt-get update`
+- Install docker `sudo apt install docker.io`
+- Enable service `sudo systemctl enable --now docker`
+- Confirm installation `docker --version`
+- Install Java at least 17 version.
 
-Changelog for tests change-log: classpath:/db/changelog/changelog-test-data.xml
-Changelog for project change-log: classpath:/db/changelog/changelog-root.xml
+2.Clone project using git clone with https.\
+3.Create local postgres database.\
+4.Run sudo `docker-compose up -d`\
+5.You should run backend project.\
+6.You should run frontend project(You fill wind how to do this in our frontend project wiki)
 
-Change docker image name:
-1)Terminal in java.
-2)sudo docker rename (old name) (new name)
-3) This step is optional. To confirm that it is now using a new name: sudo docker ps
+### Test
 
-This one is for server.
-ssh -i ./.ssh/krsobo_id_rsa -l ubuntu 193.40.255.30
+For integration tests change in `application.yml`file:\
+`change-log: classpath:/db/changelog/changelog-root.xml`\
+to\
+`change-log: classpath:/db/changelog/changelog-test-data.xml`
